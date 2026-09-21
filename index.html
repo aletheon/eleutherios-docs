@@ -1854,12 +1854,12 @@
 
           <p>CTM uses a Hebbian mechanism (BDH) to form associations between policies and services from real-world outcomes. When an association proves stable, LNN-ILP formalizes it into a proposed rule for governance review.</p>
 
-          <p>Instantiating the Eleutherios Engine or a governable policy begins by defining three primary pathways, or rule types:</p>
+          <p>Instantiating the Eleutherios Engine or a governable policy begins by defining five primary pathways, or rule types:</p>
           
           <table width="100%" border="0" style="padding-top:20px;">
             <tbody>
               <tr>
-                <td width="50%" style="background-color: #585858;text-align: center;">Pathway or Rule Type</td>
+                <td width="50%" style="background-color: #585858;text-align: center;">Pathway / Rule Type</td>
                 <td style="background-color: #585858;text-align: center;">Description</td>
               </tr>
               <tr>
@@ -2258,6 +2258,262 @@
                   </svg>
                 </td>
               </tr>
+
+              
+              <tr>
+                <td valign="middle" style="text-align:left;padding:10px;vertical-align: top;">Coordination (P → R → M)
+                  <svg
+                    viewBox="0 0 420 300"
+                    width="100%"
+                    height="auto"
+                    role="img"
+                    aria-label="Policy containing Rule containing Forum"
+                    style="display:block; width:100%; height:auto; margin:0 auto;"
+                  >
+                    <!-- POLICY boundary -->
+                    <rect
+                      x="25"
+                      y="25"
+                      width="370"
+                      height="250"
+                      fill="none"
+                      stroke="#d8dde2"
+                      stroke-width="2"
+                    />
+
+                    <!-- POLICY label -->
+                    <text
+                      x="210"
+                      y="53"
+                      text-anchor="middle"
+                      fill="#f0f0f0"
+                      font-size="21"
+                      font-weight="600"
+                      font-family="Arial, Helvetica, sans-serif"
+                    >
+                      POLICY
+                    </text>
+
+
+                    <!-- RULE boundary -->
+                    <rect
+                      x="70"
+                      y="90"
+                      width="280"
+                      height="155"
+                      fill="none"
+                      stroke="#d8dde2"
+                      stroke-width="2"
+                    />
+
+                    <!-- RULE label -->
+                    <text
+                      x="210"
+                      y="122"
+                      text-anchor="middle"
+                      fill="#f0f0f0"
+                      font-size="21"
+                      font-weight="600"
+                      font-family="Arial, Helvetica, sans-serif"
+                    >
+                      RULE
+                    </text>
+
+
+                    <!-- FORUM boundary -->
+                    <rect
+                      x="135"
+                      y="135"
+                      width="150"
+                      height="60"
+                      fill="none"
+                      stroke="#d8dde2"
+                      stroke-width="2"
+                    />
+
+                    <!-- MANAGER label -->
+                    <text
+                      x="210"
+                      y="171"
+                      text-anchor="middle"
+                      dominant-baseline="middle"
+                      fill="#f0f0f0"
+                      font-size="21"
+                      font-weight="600"
+                      font-family="Arial, Helvetica, sans-serif"
+                    >
+                      MANAGER
+                    </text>
+
+                  </svg>
+                </td>
+                <td valign="top" style="text-align:left;padding:10px;">
+                  <p>
+
+                      The management pathway defines which Service is responsible for governing or managing the Policy. The Rule establishes the relationship between the Policy, its Manager, and the governing Service.
+
+                  </p>
+                  <svg
+                    viewBox="0 0 350 70"
+                    width="100%"
+                    height="70"
+                    role="img"
+                    aria-label="rule CoordinationPolicy instantiates TicTacToePolicy and invokes ProposalBridgeService"
+                    style="display:inline-block; width:350px; height:70px; vertical-align:middle;"
+                  >
+                    <rect
+                      x="0"
+                      y="0"
+                      width="350"
+                      height="70"
+                      rx="6"
+                      fill="#1a1a1d"
+                    />
+                    <text
+                      x="14"
+                      y="20"
+                      fill="#f0f0f4"
+                      font-size="15"
+                      font-family="monospace"
+                    >
+                      <tspan x="14" dy="0">
+                        rule ManagePolicy -> 
+                      </tspan>
+                      <tspan x="14" dy="16">
+                        PolicyManagementService.manage()
+                      </tspan>
+                    </text>
+                  </svg>
+                </td>
+              </tr>
+
+              <tr>
+                <td valign="middle" style="text-align:left;padding:10px;vertical-align: top;">Coordination (P → R → B)
+                  <svg
+                    viewBox="0 0 420 300"
+                    width="100%"
+                    height="auto"
+                    role="img"
+                    aria-label="Policy containing Rule containing Forum"
+                    style="display:block; width:100%; height:auto; margin:0 auto;"
+                  >
+                    <!-- POLICY boundary -->
+                    <rect
+                      x="25"
+                      y="25"
+                      width="370"
+                      height="250"
+                      fill="none"
+                      stroke="#d8dde2"
+                      stroke-width="2"
+                    />
+
+                    <!-- POLICY label -->
+                    <text
+                      x="210"
+                      y="53"
+                      text-anchor="middle"
+                      fill="#f0f0f0"
+                      font-size="21"
+                      font-weight="600"
+                      font-family="Arial, Helvetica, sans-serif"
+                    >
+                      POLICY
+                    </text>
+
+
+                    <!-- RULE boundary -->
+                    <rect
+                      x="70"
+                      y="90"
+                      width="280"
+                      height="155"
+                      fill="none"
+                      stroke="#d8dde2"
+                      stroke-width="2"
+                    />
+
+                    <!-- RULE label -->
+                    <text
+                      x="210"
+                      y="122"
+                      text-anchor="middle"
+                      fill="#f0f0f0"
+                      font-size="21"
+                      font-weight="600"
+                      font-family="Arial, Helvetica, sans-serif"
+                    >
+                      RULE
+                    </text>
+
+
+                    <!-- FORUM boundary -->
+                    <rect
+                      x="135"
+                      y="135"
+                      width="150"
+                      height="60"
+                      fill="none"
+                      stroke="#d8dde2"
+                      stroke-width="2"
+                    />
+
+                    <!-- MEMBER label -->
+                    <text
+                      x="210"
+                      y="171"
+                      text-anchor="middle"
+                      dominant-baseline="middle"
+                      fill="#f0f0f0"
+                      font-size="21"
+                      font-weight="600"
+                      font-family="Arial, Helvetica, sans-serif"
+                    >
+                      MEMBER
+                    </text>
+
+                  </svg>
+                </td>
+                <td valign="top" style="text-align:left;padding:10px;">
+                  <p>
+
+                      The membership pathway defines which Services can operate within a Policy and what operational activities they can perform on behalf of its Members. Members are bound by the Policy and operationally confined to the Forum, while Managers have governance authority over the Policy itself. Members may participate in or propose changes through the Forum, but cannot directly alter the Policy, membership, management structure, or Permissions.
+
+                  </p>
+                  <svg
+                    viewBox="0 0 350 70"
+                    width="100%"
+                    height="70"
+                    role="img"
+                    aria-label="rule CoordinationPolicy instantiates TicTacToePolicy and invokes ProposalBridgeService"
+                    style="display:inline-block; width:350px; height:70px; vertical-align:middle;"
+                  >
+                    <rect
+                      x="0"
+                      y="0"
+                      width="350"
+                      height="70"
+                      rx="6"
+                      fill="#1a1a1d"
+                    />
+                    <text
+                      x="14"
+                      y="20"
+                      fill="#f0f0f4"
+                      font-size="15"
+                      font-family="monospace"
+                    >
+                      <tspan x="14" dy="0">
+                        rule Player -> GameForum.addMember
+                      </tspan>
+                      <tspan x="14" dy="16">
+                        ('player_x', permission_set)
+                      </tspan>
+                    </text>
+                  </svg>
+                </td>
+              </tr>
+
             </tbody>
           </table>
         </section>
