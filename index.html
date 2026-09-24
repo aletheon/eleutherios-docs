@@ -289,6 +289,83 @@
   stroke: #666672;
   stroke-width: 1.5;
 }
+
+/* Code examples (formerly fixed-height SVG boxes): real text, so they
+   wrap cleanly on narrow screens with normal line spacing. Same box,
+   colours and max width as before. */
+.code-snippet {
+  display: block; box-sizing: border-box;
+  width: 100%; max-width: 350px; margin: 10px 0;
+  padding: 10px 14px; border-radius: 6px;
+  background: #1a1a1d; color: #f0f0f4;
+  font-family: monospace; font-size: 14.4px; line-height: 1.5;
+}
+.code-snippet > span { display: block; white-space: pre-wrap; overflow-wrap: anywhere; }
+
+/* Diagrams scale to the width of their container on every screen; the
+   inline max-widths keep desktop sizes as they were. */
+main svg { max-width: 100%; height: auto; }
+
+/* Tap-to-enlarge (touch screens only; wired up by the script at the end
+   of the page). */
+.enlarge-hint { display: none; }
+@media (pointer: coarse) {
+  main svg { cursor: zoom-in; }
+  .enlarge-hint {
+    display: block; text-align: center; font-size: 13px; color: var(--dim);
+    margin: 4px 0 16px;
+  }
+}
+.diagram-viewer {
+  position: fixed; inset: 0; z-index: 100;
+  background: var(--bg);
+  touch-action: none; overflow: hidden;
+}
+.diagram-viewer .dv-stage { position: absolute; inset: 0; overflow: hidden; }
+.diagram-viewer .dv-content { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+.diagram-viewer .dv-content svg { display: block; margin: 0 !important; max-width: none; }
+.diagram-viewer .dv-close {
+  position: absolute; z-index: 1;
+  top: calc(10px + env(safe-area-inset-top, 0px)); right: 10px;
+  min-width: 44px; min-height: 44px; padding: 0 14px;
+  border-radius: 8px; border: 1px solid var(--border);
+  background: var(--surface); color: var(--bright);
+  font-family: inherit; font-size: 15px; cursor: pointer;
+}
+.diagram-viewer .dv-help {
+  position: absolute; left: 0; right: 0;
+  bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  text-align: center; font-size: 13px; color: var(--dim); pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  /* 70%-wide diagrams use the full width on phones */
+  main svg { width: 100% !important; }
+
+  /* Pathway table: each row stacks as name, diagram, description,
+     example; header row hidden; rows read as separate sections. */
+  main table, main tbody, main tr, main td {
+    display: block; width: 100% !important; box-sizing: border-box;
+  }
+  main table { padding-top: 0 !important; }
+  main table tr:first-child { display: none; }
+  main table td { padding: 0 !important; }
+  main table tr + tr {
+    margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--border);
+  }
+  main table tr:nth-child(2) { border-top: none; padding-top: 0; margin-top: 12px; }
+  main table tr > td:first-child::first-line {
+    font-size: 18px; font-weight: 600; color: var(--bright);
+  }
+  main table tr > td:first-child svg { margin: 12px 0 !important; }
+
+  .header { flex: 0 0 auto; height: auto; min-height: 44px; flex-wrap: wrap; padding: 6px 14px; }
+}
+@media (pointer: coarse) {
+  .nav-btn { min-height: 44px; }
+  .doc-index a { display: inline-block; padding: 10px 0; }
+  .doc-index ol > li, .doc-index ul > li { margin: 0; }
+}
   </style>
 </head>
 <body>
@@ -297,7 +374,7 @@
     <span class="hsep"></span>
     <span class="active-policy dim mono">Documentation</span>
     <div class="header-right">
-      <a class="nav-btn" href="/" title="Back to graph">&larr; Graph</a>
+      <a class="nav-btn" href="https://demo.eleutherios.app" title="Open the live Eleutherios demo">Live demo &rarr;</a>
     </div>
   </div>
 
@@ -1867,7 +1944,6 @@
                   <svg
                     viewBox="0 0 420 300"
                     width="100%"
-                    height="auto"
                     role="img"
                     aria-label="Policy containing Rule containing Forum"
                     style="display:block; width:100%; height:auto; margin:0 auto;"
@@ -1955,61 +2031,12 @@
                   <p>1. Members invoke governed capacity or operations.</p>
                   <p>Members can invoke a Service or capability available through the Forum.  E.g:</p>
                   <p>
-                    <svg
-                      viewBox="0 0 350 42"
-                      width="100%"
-                      height="42"
-                      role="img"
-                      aria-label="player_x invokes game_board with move 1, 2"
-                      style="display:inline-block; width:350px; height:42px; vertical-align:middle;">
-                      <rect
-                        x="0"
-                        y="0"
-                        width="350"
-                        height="42"
-                        rx="6"
-                        fill="#1a1a1d"
-                      />
-
-                      <text
-                        x="14"
-                        y="27"
-                        fill="#f0f0f4"
-                        font-size="15"
-                        font-family="monospace"
-                      >player_x: @game_board move 1, 2</text>
-                    </svg>
+                    <code class="code-snippet"><span>player_x: @game_board move 1, 2</span></code>
                   </p>
                   <p>2. Managers manage the governing policy.</p>
                   <p>Managers can propose or enact changes to the Policy and its Rules through a governed management interface.  E.g:</p>
                   <p>
-                    <svg
-                      viewBox="0 0 350 70"
-                      width="100%"
-                      height="70"
-                      role="img"
-                      aria-label="player_x invokes game_board with move 1, 2"
-                      style="display:inline-block; width:350px; height:70px; vertical-align:middle;">
-                      <rect
-                        x="0"
-                        y="0"
-                        width="350"
-                        height="70"
-                        rx="6"
-                        fill="#1a1a1d"
-                      />
-
-                      <text
-                        x="14"
-                        y="20"
-                        fill="#f0f0f4"
-                        font-size="15"
-                        font-family="monospace"
-                      >
-                        <tspan x="14" dy="0">game_manager: @Eleuscript</tspan>
-                        <tspan x="14" dy="16">CreateRule { ... }</tspan>
-                      </text>
-                    </svg>
+                    <code class="code-snippet"><span>game_manager: @Eleuscript</span><span>CreateRule { ... }</span></code>
                   </p>
                 </td>
               </tr>
@@ -2018,7 +2045,6 @@
                   <svg
                     viewBox="0 0 420 300"
                     width="100%"
-                    height="auto"
                     role="img"
                     aria-label="Policy containing Rule containing Forum"
                     style="display:block; width:100%; height:auto; margin:0 auto;"
@@ -2105,33 +2131,7 @@
                   <p>The computation or closure pathway defines how a Policy governs the behavior of a Service.</p>
                   <p>The Rule specifies the constraints or conditions under which the Service may operate, while performing the governed operation.</p>
                   <p>
-                    <svg
-                      viewBox="0 0 350 70"
-                      width="100%"
-                      height="70"
-                      role="img"
-                      aria-label="player_x invokes game_board with move 1, 2"
-                      style="display:inline-block; width:350px; height:70px; vertical-align:middle;">
-                      <rect
-                        x="0"
-                        y="0"
-                        width="350"
-                        height="70"
-                        rx="6"
-                        fill="#1a1a1d"
-                      />
-
-                      <text
-                        x="14"
-                        y="20"
-                        fill="#f0f0f4"
-                        font-size="15"
-                        font-family="monospace"
-                      >
-                        <tspan x="14" dy="0">rule ApplyMove -&gt;</tspan>
-                        <tspan x="14" dy="16">GameBoardService.applyMove()</tspan>
-                      </text>
-                    </svg>
+                    <code class="code-snippet"><span>rule ApplyMove -&gt;</span><span>GameBoardService.applyMove()</span></code>
                   </p>
                 </td>
               </tr>
@@ -2140,7 +2140,6 @@
                   <svg
                     viewBox="0 0 420 300"
                     width="100%"
-                    height="auto"
                     role="img"
                     aria-label="Policy containing Rule containing Forum"
                     style="display:block; width:100%; height:auto; margin:0 auto;"
@@ -2225,37 +2224,7 @@
                   <p>The constraint pathway narrows the scope of the Policy or domain by tightening the rules of its parent.</p>
 
                   <p>The Rule specifies that a child Policy can extend a parent Policy, inheriting access to its parent's services.</p>
-                  <svg
-                    viewBox="0 0 350 70"
-                    width="100%"
-                    height="70"
-                    role="img"
-                    aria-label="rule CoordinationPolicy instantiates TicTacToePolicy and invokes ProposalBridgeService"
-                    style="display:inline-block; width:350px; height:70px; vertical-align:middle;"
-                  >
-                    <rect
-                      x="0"
-                      y="0"
-                      width="350"
-                      height="70"
-                      rx="6"
-                      fill="#1a1a1d"
-                    />
-                    <text
-                      x="14"
-                      y="20"
-                      fill="#f0f0f4"
-                      font-size="15"
-                      font-family="monospace"
-                    >
-                      <tspan x="14" dy="0">
-                        rule TicTacToePolicy extends
-                      </tspan>
-                      <tspan x="14" dy="16">
-                        CoordinationPolicy
-                      </tspan>
-                    </text>
-                  </svg>
+                  <code class="code-snippet"><span>rule TicTacToePolicy extends</span><span>CoordinationPolicy</span></code>
                 </td>
               </tr>
 
@@ -2265,7 +2234,6 @@
                   <svg
                     viewBox="0 0 420 300"
                     width="100%"
-                    height="auto"
                     role="img"
                     aria-label="Policy containing Rule containing Forum"
                     style="display:block; width:100%; height:auto; margin:0 auto;"
@@ -2353,37 +2321,7 @@
                       The management pathway defines which Service is responsible for governing or managing the Policy. The Rule establishes the relationship between the Policy, its Manager, and the governing Service.
 
                   </p>
-                  <svg
-                    viewBox="0 0 350 70"
-                    width="100%"
-                    height="70"
-                    role="img"
-                    aria-label="rule CoordinationPolicy instantiates TicTacToePolicy and invokes ProposalBridgeService"
-                    style="display:inline-block; width:350px; height:70px; vertical-align:middle;"
-                  >
-                    <rect
-                      x="0"
-                      y="0"
-                      width="350"
-                      height="70"
-                      rx="6"
-                      fill="#1a1a1d"
-                    />
-                    <text
-                      x="14"
-                      y="20"
-                      fill="#f0f0f4"
-                      font-size="15"
-                      font-family="monospace"
-                    >
-                      <tspan x="14" dy="0">
-                        rule ManagePolicy -> 
-                      </tspan>
-                      <tspan x="14" dy="16">
-                        PolicyManagementService.manage()
-                      </tspan>
-                    </text>
-                  </svg>
+                  <code class="code-snippet"><span>rule ManagePolicy -></span><span>PolicyManagementService.manage()</span></code>
                 </td>
               </tr>
 
@@ -2392,7 +2330,6 @@
                   <svg
                     viewBox="0 0 420 300"
                     width="100%"
-                    height="auto"
                     role="img"
                     aria-label="Policy containing Rule containing Forum"
                     style="display:block; width:100%; height:auto; margin:0 auto;"
@@ -2480,37 +2417,7 @@
                       The membership pathway defines which Services can operate within a Forum and what operational activities they can perform on behalf of its Members. Members are bound by the Policy and operationally confined to the Forum, while Managers have governance authority over the Policy itself. Members may participate in or propose changes through the Forum, but cannot directly alter the Policy, membership, management structure, or Permissions.
 
                   </p>
-                  <svg
-                    viewBox="0 0 350 70"
-                    width="100%"
-                    height="70"
-                    role="img"
-                    aria-label="rule CoordinationPolicy instantiates TicTacToePolicy and invokes ProposalBridgeService"
-                    style="display:inline-block; width:350px; height:70px; vertical-align:middle;"
-                  >
-                    <rect
-                      x="0"
-                      y="0"
-                      width="350"
-                      height="70"
-                      rx="6"
-                      fill="#1a1a1d"
-                    />
-                    <text
-                      x="14"
-                      y="20"
-                      fill="#f0f0f4"
-                      font-size="15"
-                      font-family="monospace"
-                    >
-                      <tspan x="14" dy="0">
-                        rule PlayerX -> GameForum.addMember
-                      </tspan>
-                      <tspan x="14" dy="16">
-                        ('player_x', permission_set)
-                      </tspan>
-                    </text>
-                  </svg>
+                  <code class="code-snippet"><span>rule PlayerX -> GameForum.addMember</span><span>('player_x', permission_set)</span></code>
                 </td>
               </tr>
 
@@ -2538,7 +2445,6 @@
           <svg
             viewBox="0 0 760 125"
             width="100%"
-            height="auto"
             role="img"
             aria-label="Company A private PolicyGraph with a shared capability policy containing a supplier forum and invoice submission service"
             style="display:block; width:100%; height:auto; margin:20px auto;"
@@ -2635,6 +2541,105 @@
       </section>
     </main>
   </div>
-  <footer style="text-align: center; padding: 24px 14px; font-size: 14px; color: var(--dim);">© 2026 Rob Kara</footer>
+  <footer style="text-align: center; padding: 24px 14px; font-size: 14px; color: var(--dim);">© 2026 Eleutherios Ltd</footer>
+  <script>
+  // Tap-to-enlarge for diagrams on touch screens: opens a full-screen
+  // view with pinch-zoom and one-finger pan (same approach as the graph
+  // canvas on the main page). Desktop (mouse) is left untouched.
+  (function () {
+    var coarse = window.matchMedia('(pointer: coarse)');
+    var diagrams = Array.prototype.slice.call(document.querySelectorAll('main svg'));
+    diagrams.forEach(function (svg) {
+      var hint = document.createElement('div');
+      hint.className = 'enlarge-hint';
+      hint.textContent = 'tap to enlarge';
+      svg.insertAdjacentElement('afterend', hint);
+      svg.addEventListener('click', function () { if (coarse.matches) open(svg); });
+    });
+
+    var viewer = null, content = null, view = { x: 0, y: 0, s: 1 }, base = 1;
+    function apply() {
+      content.style.transform = 'translate(' + view.x + 'px,' + view.y + 'px) scale(' + view.s + ')';
+    }
+    function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+    function open(svg) {
+      close();
+      viewer = document.createElement('div');
+      viewer.className = 'diagram-viewer';
+      viewer.setAttribute('role', 'dialog');
+      viewer.setAttribute('aria-modal', 'true');
+      viewer.setAttribute('aria-label', svg.getAttribute('aria-label') || 'Diagram');
+      viewer.innerHTML = '<div class="dv-stage"><div class="dv-content"></div></div>' +
+        '<button type="button" class="dv-close" aria-label="Close diagram">✕ Close</button>' +
+        '<div class="dv-help">pinch to zoom · drag to move</div>';
+      document.body.appendChild(viewer);
+      document.documentElement.style.overflow = 'hidden';
+      content = viewer.querySelector('.dv-content');
+      var clone = svg.cloneNode(true);
+      clone.removeAttribute('width');
+      clone.removeAttribute('height');
+      var vb = (svg.getAttribute('viewBox') || '0 0 100 100').split(/[\s,]+/).map(Number);
+      var aspect = vb[3] / vb[2];
+      var W = viewer.clientWidth, H = viewer.clientHeight;
+      var w = Math.min(W - 24, (H - 120) / aspect);
+      clone.style.cssText = 'display:block;margin:0;max-width:none;width:' + w + 'px;height:' + (w * aspect) + 'px;';
+      content.appendChild(clone);
+      view = { x: (W - w) / 2, y: (H - w * aspect) / 2, s: 1 };
+      apply();
+      viewer.querySelector('.dv-close').addEventListener('click', close);
+      attachTouch(viewer);
+    }
+    function close() {
+      if (!viewer) return;
+      viewer.remove();
+      viewer = null; content = null;
+      document.documentElement.style.overflow = '';
+    }
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+
+    function attachTouch(el) {
+      var drag = null, pinch = null;
+      function pinchState(e) {
+        var a = e.touches[0], b = e.touches[1];
+        return {
+          dist: Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY) || 1,
+          midX: (a.clientX + b.clientX) / 2, midY: (a.clientY + b.clientY) / 2,
+        };
+      }
+      el.addEventListener('touchstart', function (e) {
+        if (e.target.closest('.dv-close')) return;
+        if (e.touches.length === 2) {
+          drag = null;
+          pinch = pinchState(e); pinch.v = { x: view.x, y: view.y, s: view.s };
+        } else if (e.touches.length === 1) {
+          pinch = null;
+          drag = { x: e.touches[0].clientX, y: e.touches[0].clientY, vx: view.x, vy: view.y };
+        }
+      }, { passive: true });
+      el.addEventListener('touchmove', function (e) {
+        if (e.target.closest('.dv-close')) return;
+        e.preventDefault();
+        if (pinch && e.touches.length === 2) {
+          var p = pinchState(e), v0 = pinch.v;
+          var s = clamp(v0.s * p.dist / pinch.dist, 0.5, 8);
+          var k = s / v0.s;
+          view = { s: s, x: p.midX - (pinch.midX - v0.x) * k, y: p.midY - (pinch.midY - v0.y) * k };
+          apply();
+        } else if (drag && e.touches.length === 1) {
+          view.x = drag.vx + e.touches[0].clientX - drag.x;
+          view.y = drag.vy + e.touches[0].clientY - drag.y;
+          apply();
+        }
+      }, { passive: false });
+      el.addEventListener('touchend', function (e) {
+        if (pinch && e.touches.length === 1) {
+          pinch = null;
+          drag = { x: e.touches[0].clientX, y: e.touches[0].clientY, vx: view.x, vy: view.y };
+        } else if (!e.touches.length) { pinch = null; drag = null; }
+      }, { passive: true });
+    }
+  })();
+  </script>
 </body>
 </html>
