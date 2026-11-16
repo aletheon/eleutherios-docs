@@ -2026,15 +2026,15 @@ main svg { max-width: 100%; height: auto; }
                   </svg>
                 </td>
                 <td valign="top" style="text-align:left;padding:10px;">
-                  <p>The coordination pathway provides the network (full-duplex) where two primary activities take place:</p>
-
-                  <p>1. Members invoke governed capacity or operations.</p>
-                  <p>Members can invoke a Service or capability available through the Forum.  E.g:</p>
+                  <p>The coordination pathway provides the network or space where requests or activities can take place.</p>
+                  <p>
+                    <code class="code-snippet"><span>rule GameForum -&gt;</span><span>ForumManagementService.Create()</span></code>
+                  </p>
+                  <p>Members can invoke a Service or its capabilities through the forum:</p>
                   <p>
                     <code class="code-snippet"><span>player_x: @game_board move 1, 2</span></code>
                   </p>
-                  <p>2. Managers manage the governing policy.</p>
-                  <p>Managers can propose or enact changes to the Policy and its Rules through a governed management interface.  E.g:</p>
+                  <p>Managers can accept or create new Rules for the Policy:</p>
                   <p>
                     <code class="code-snippet"><span>game_manager: @Eleuscript</span><span>CreateRule { ... }</span></code>
                   </p>
@@ -2129,7 +2129,7 @@ main svg { max-width: 100%; height: auto; }
                 </td>
                 <td valign="top" style="text-align:left;padding:10px;">
                   <p>The capability or closure pathway enables a Service or its behavior to be made available through a Policy.</p>
-                  <p>The service is then exposed as a member of the network or forum, so that other members can then call it, to access that capability.</p>
+                  <p>The service is then exposed as a member of the network or forum, so that other members can then invoke it.</p>
                   <p>
                     <code class="code-snippet"><span>rule ApplyMove -&gt;</span><span>GameBoardService.applyMove()</span></code>
                   </p>
@@ -2224,7 +2224,7 @@ main svg { max-width: 100%; height: auto; }
                   <p>The constraint pathway narrows the scope of the Policy or domain by tightening the rules of its parent.</p>
 
                   <p>The Rule specifies that a child Policy can extend a parent Policy, inheriting access to its parent's services.</p>
-                  <code class="code-snippet"><span>rule TicTacToePolicy extends</span><span>CoordinationPolicy</span></code>
+                  <code class="code-snippet"><span>rule ExtendCoordinationPolicy -&gt;</span><span>TicTacToePolicy extends CoordinationPolicy</span></code>
                 </td>
               </tr>
 
