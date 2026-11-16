@@ -2430,7 +2430,7 @@ main svg { max-width: 100%; height: auto; }
 
           <p>Using the P → R → P (parent/child) relationship:</p>
 
-          <p>A child policy may add or tighten constraints, but can never remove or relax one it inherits from its parent.</p>
+          <p>A child policy may add or tighten constraints, but can never remove or relax them.</p>
 
           <p>For example, CoordinationPolicy sets ChatService's line limit to 60. TicTacToePolicy, extending CoordinationPolicy, may set its own limit to 50 — tighter, so valid. Setting it to 70 would be rejected outright, before anything changes.</p>
         </section>
